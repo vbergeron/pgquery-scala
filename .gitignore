@@ -1,0 +1,17 @@
+.bloop
+.bsp
+.DS_Store
+.ensime
+.ensime_cache
+*.env
+.history
+.idea/
+*.iml
+*.log
+.metals
+*/metals.sbt
+project/project
+project/target
+target/
+.vscode
+
