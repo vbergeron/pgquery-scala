@@ -24,7 +24,18 @@ do
     ./jextract-22/bin/jextract \
        --output modules/pgquery/src/main/java/ libpg_query/pg_query.h \
        --target-package $PG_QUERY_PACKAGE \
-       --library pg_query
+       --library pg_query_v$version
+    
+    # if PGQUERY_BUILD_SHARED is set, build shared library
+    if [ $PGQUERY_BUILD_SHARED == "true" ];
+    then
+        echo "Compiling shared library ($PG_QUERY_PACKAGE)"
+        cd libpg_query
+        make build_shared
+        mkdir ../lib
+        mv libpg_query.so ../lib/libpg_query_v$version.so
+        cd ..
+    fi
     
     rm -rf libpg_query
 done
