@@ -1,18 +1,17 @@
 ThisBuild / scalaVersion := "3.5.2"
-
+ThisBuild / version := "0.2.0"
+ThisBuild / organization := "com.exemple"
 ThisBuild / Compile / run / fork := true
 
 lazy val `pgquery-bindings` = (project in file("modules/pgquery-bindings"))
-  .settings(
-    organization := "com.exemple",
-    version := "0.2.0"
-  )
 
 lazy val pgquery = (project in file("modules/pgquery"))
   .dependsOn(`pgquery-bindings`)
+
+lazy val `pgquery-doobie` = (project in file("modules/pgquery-doobie"))
+  .dependsOn(pgquery)
   .settings(
-    organization := "com.exemple",
-    version := "0.2.0"
+    libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC5"
   )
 
 lazy val root = (project in file("."))
