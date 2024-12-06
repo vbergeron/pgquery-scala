@@ -11,6 +11,7 @@ def parse(version: Expr[PgVersion], query: Expr[String])(using Quotes): Option[P
     case '{ PgVersion.V17 }  => pgquery.bridge.Bridge.V17
     case '{ PgVersion.V16 }  => pgquery.bridge.Bridge.V16
     case '{ PgVersion.V15 }  => pgquery.bridge.Bridge.V15
+    case term => report.errorAndAbort(s"PgVersion: ${term.show}")
   
   val arena = Arena.ofConfined()
   try

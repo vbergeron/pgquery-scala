@@ -14,4 +14,10 @@ lazy val `pgquery-doobie` = (project in file("modules/pgquery-doobie"))
     libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC5"
   )
 
+lazy val `pgquery-skunk` = (project in file("modules/pgquery-skunk"))
+  .dependsOn(pgquery)
+  .settings(
+    libraryDependencies += "org.tpolecat" %% "skunk-core" % "0.6.4"
+  )
+
 lazy val root = (project in file("."))

@@ -7,9 +7,7 @@ import doobie.util.fragment.Fragment
 inline given PgVersion = PgVersion.V17
 
 extension (inline sc: StringContext)
-  inline def pgsql(args: SingleFragment[?]*)(using
-      inline version: PgVersion
-  ): Fragment =
+  inline def pgsql(args: SingleFragment[?]*)(using inline version: PgVersion): Fragment =
     ${ macros.process('sc, 'args, 'version) }
 
   inline def pgsql15(args: SingleFragment[?]*): Fragment =
