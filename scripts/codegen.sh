@@ -22,7 +22,7 @@ do
     
     echo "Generating bindings ($PG_QUERY_PACKAGE)"
     ./jextract-22/bin/jextract \
-       --output modules/pgquery/src/main/java/ libpg_query/pg_query.h \
+       --output modules/pgquery-bindings/src/main/java/ libpg_query/pg_query.h \
        --target-package $PG_QUERY_PACKAGE \
        --library pg_query_v$version
     

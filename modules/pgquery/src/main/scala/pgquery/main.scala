@@ -1,7 +1,5 @@
 package pgquery
 
-import java.lang.foreign.Arena
-
 enum PgVersion:
   case V15, V16, V17
 
