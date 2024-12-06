@@ -5,7 +5,7 @@ import java.lang.foreign.Arena
 import scala.quoted.*
 
 
-def parse(version: Expr[PgVersion], query: Expr[String])(using Quotes): Option[ParseError] =
+def check(version: Expr[PgVersion], query: Expr[String])(using Quotes): Option[ParseError] =
   import quotes.reflect.*
   val bridge = version match
     case '{ PgVersion.V17 }  => pgquery.bridge.Bridge.V17
@@ -26,6 +26,13 @@ def parse(version: Expr[PgVersion], query: Expr[String])(using Quotes): Option[P
     finally bridge.pg_query_free_parse_result(result)
 
   finally arena.close()
+
+def pgsql(version: Expr[PgVersion], query: Expr[String])(using Quotes): Expr[Unit] =
+  import quotes.reflect.*
+  check(version, query) match
+    case Some(err) => report.warning(err.message)
+    case None      => ()
+  '{}
 
 object utils:
   def parts(sc: Expr[StringContext])(using Quotes): List[String] =
