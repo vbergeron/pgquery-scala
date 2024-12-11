@@ -16,7 +16,7 @@ def process(
 
   val str = parts.mkString("null")
 
-  pgquery.macros.parse(version, Expr(str)) match
+  pgquery.macros.check(version, Expr(str)) match
     case Some(err) => report.warning(err.message)
     case None      => report.info(parts.mkString("?"))
 
