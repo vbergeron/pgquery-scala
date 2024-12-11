@@ -11,7 +11,9 @@ sealed trait Bridge:
   def pg_query_error_message(error: MemorySegment): MemorySegment
 
 object Bridge:
+
   case object V17 extends Bridge:
+
     def pg_query_parse(arena: Arena, buffer: MemorySegment): MemorySegment =
       v17.pg_query_h.pg_query_parse(arena, buffer)
 
@@ -25,6 +27,7 @@ object Bridge:
       v17.PgQueryError.message(error)
 
   case object V16 extends Bridge:
+
     def pg_query_parse(arena: Arena, buffer: MemorySegment): MemorySegment =
       v16.pg_query_h.pg_query_parse(arena, buffer)
 
@@ -38,6 +41,7 @@ object Bridge:
       v16.PgQueryError.message(error)
 
   case object V15 extends Bridge:
+
     def pg_query_parse(arena: Arena, buffer: MemorySegment): MemorySegment =
       v15.pg_query_h.pg_query_parse(arena, buffer)
 
